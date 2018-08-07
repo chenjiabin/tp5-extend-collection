@@ -3,7 +3,6 @@
     "description": "extend collection for thinkphp5",
     "homepage": "https://github.com/chenjiabin/tp5-extend-collection",
     "license": "Apache-2.0",
-    "minimum-stability": "dev",
     "version": "0.0.1",
     "authors": [
         {
