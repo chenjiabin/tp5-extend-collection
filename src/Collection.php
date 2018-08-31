@@ -102,5 +102,38 @@ class Collection extends \think\Collection
         return ! is_string($value) && is_callable($value);
     }
 
+    public function keyBy($keyBy)
+    {
+        $keyBy = $this->valueRetriever($keyBy);
+
+        $results = [];
+
+        foreach ($this->items as $key => $item) {
+            $resolvedKey = $keyBy($item, $key);
+
+            if (is_object($resolvedKey)) {
+                $resolvedKey = (string) $resolvedKey;
+            }
+
+            $results[$resolvedKey] = $item;
+        }
+
+        return new static($results);
+    }
+
+    /**
+     * Remove an item from the collection by key.
+     *
+     * @param  string|array  $keys
+     * @return $this
+     */
+    public function forget($keys)
+    {
+        foreach ((array) $keys as $key) {
+            $this->offsetUnset($key);
+        }
+
+        return $this;
+    }
     
 }
